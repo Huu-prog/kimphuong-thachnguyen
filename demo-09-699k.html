@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Thiệp Cưới -Kim Phượng &amp;Thạch Nguyên </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Battambang:wght@300;400;500;600;700&family=Beau+Rivage&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Koulen&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Moul&family=Noto+Sans+Khmer:wght@400;500;600;700&family=Noto+Serif+Khmer:wght@400;500;600;700&family=Taviraj:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="locked">
+    <div class="language-switch" role="group" aria-label="Chuyển đổi ngôn ngữ" data-i18n-aria="language_switch">
+        <button type="button" class="language-option active" data-language="vi" aria-pressed="true">VI</button>
+        <button type="button" class="language-option" data-language="km" aria-pressed="false">ខ្មែរ</button>
+    </div>
+
+
+    <!-- MÀN HÌNH BÌA PHỦ (PEONY RED ENVELOPE COVER) -->
+    <div id="cover-overlay" class="pnr-cover" data-landing-screenshot-id="invite-envelope">
+        <div class="pnr-cover-inner">
+            <!-- Các lớp họa tiết nền trôi nhẹ -->
+            <img src="assets/cloud-a.webp" alt="" aria-hidden="true" class="pnr-deco pnr-drift deco-cloud-top"
+                onerror="this.style.display='none'">
+            <img src="assets/cloud-c.webp" alt="" aria-hidden="true" class="pnr-deco pnr-drift deco-cloud-bottom"
+                onerror="this.style.display='none'">
+            <img src="assets/peony-line.webp" alt="" aria-hidden="true" class="pnr-deco deco-peony-line"
+                onerror="this.style.display='none'">
+
+            <!-- Cụm hoa mẫu đơn & bướm -->
+            <div class="pnr-cover-rise pnr-cover-bloom cover-bloom-box">
+                <img src="assets/peony.webp" alt="" aria-hidden="true" class="cover-peony-img"
+                    onerror="this.style.display='none'">
+                <img src="assets/butterfly.webp" alt="" aria-hidden="true" class="cover-butterfly-img"
+                    onerror="this.style.display='none'">
+            </div>
+
+            <!-- Vòng chữ lồng tên viết tắt H & T -->
+            <div class="pnr-cover-rise cover-wreath-box" style="animation-delay: 0.1s;">
+                <div class="wreath-frame">
+                    <img src="assets/8.PNG" alt="" aria-hidden="true" class="wreath-bg-img"
+                        onerror="this.style.display='none'">
+                    <!-- <span class="wreath-char wreath-left" aria-hidden="true">N</span>
+                    <span class="wreath-char wreath-right" aria-hidden="true">P</span> -->
+                </div>
+            </div>
+
+            <!-- Tên cô dâu chú rể xếp 3 tầng -->
+            <h1 class="pnr-cover-rise cover-couple-names" style="animation-delay: 0.15s;">
+                <span class="c-line language-vi">Kim Phượng</span>
+                <span class="c-line language-km khmer-text" lang="km" hidden> គីម ភឿង</span>
+                <span class="c-and">&amp;</span>
+                <span class="c-line language-vi">Thạch Nguyên </span>
+                <span class="c-line language-km khmer-text" lang="km" hidden>ថាច់ ង្វៀន</span>
+            </h1>
+
+            <!-- Ngày cưới -->
+            <div class="pnr-cover-rise cover-date-label" style="animation-delay: 0.25s;">
+                <span data-i18n="cover_date">17 tháng 1, 2027</span>
+            </div>
+
+            <!-- Lời mời & tên khách mời qua URL (?to=...) -->
+            <div class="pnr-cover-rise cover-invite-box" style="animation-delay: 0.3s;">
+                <p class="cover-invite-text" data-i18n="cover_invite">Kính Mời</p>
+
+            </div>
+
+            <!-- Nút Mở thiệp -->
+            <button type="button" id="open-invite-btn" class="pnr-cover-rise pnr-open-btn"
+                style="animation-delay: 0.4s;">
+                <span data-i18n="open_invite">Mở thiệp</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- NÚT ĐIỀU KHIỂN NHẠC NỀN -->
+    <div class="music-floating">
+        <button type="button" id="music-btn" aria-label="Phát/Tạm dừng nhạc" data-i18n-aria="music_toggle"
+            class="music-circle-btn">
+            <div class="music-bars" id="music-bars">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </button>
+    </div>
+    <audio id="bg-music" src="https://music.thieponline.app/library/be.mp3" loop preload="none"></audio>
+
+    <!-- KHUNG THIỆP CHÍNH (MAX-WIDTH 560PX) -->
+    <div class="page-wrapper">
+        <main class="pnr-root">
+
+            <!-- 1. HEADER BÌA FULL ẢNH -->
+            <header class="hero-header">
+                <div class="hero-aspect">
+                    <img alt="Thạch Nguyên &amp; Kim Phượng" class="hero-bg-img" src="assets/6.jpg">
+                    <div class="hero-gradient"></div>
+
+                </div>
+            </header>
+
+            <!-- 2. SECTION LỊCH THÁNG LỒNG PHONG BÌ ĐỎ -->
+            <section class="sec-calendar">
+                <div class="cal-stage pnr-reveal">
+                    <!-- Phong bì đỏ góc vuông có nếp gấp & đường chỉ viền -->
+                    <div class="env-red-base" aria-hidden="true">
+                        <div class="env-inner-frame"></div>
+                        <div class="env-flap-crease"></div>
+                    </div>
+
+                    <!-- Tờ lịch giấy lồng bên trong -->
+                    <div class="torn-paper-card">
+                        <div class="cal-paper-border" aria-hidden="true"></div>
+                        <p class="cal-month-title" data-i18n="calendar_month">Tháng 1 / 2027</p>
+                        <div class="cal-grid">
+                            <span class="cal-head" data-i18n="mon">T2</span>
+                            <span class="cal-head" data-i18n="tue">T3</span>
+                            <span class="cal-head" data-i18n="wed">T4</span>
+                            <span class="cal-head" data-i18n="thu">T5</span>
+                            <span class="cal-head" data-i18n="fri">T6</span>
+                            <span class="cal-head" data-i18n="sat">T7</span>
+                            <span class="cal-head" data-i18n="sun">CN</span>
+
+                            <span></span><span></span><span></span><span></span><span></span><span></span><span>1</span>
+                            <span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span>
+                            <span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                            <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span>
+                            <span>23</span><span>24</span>
+                            <span class="cal-wedding-day" aria-label="Ngày cưới 17">
+                                <span class="cal-day-mark" aria-hidden="true"></span>
+                                <b class="cal-day-num">17</b>
+                            </span>
+                            <span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                        </div>
+                    </div>
+
+                    <!-- Hoa văn góc Khmer (Kbach) thanh mảnh, góc vuông -->
+                    <svg class="kbach-corner" viewBox="0 0 84 84" aria-hidden="true">
+                        <path class="kbach-frame" d="M6 78 V6 H78" fill="none" stroke="currentColor"
+                            stroke-width="1.6" />
+                        <path class="kbach-subframe" d="M12 72 V12 H72" fill="none" stroke="currentColor"
+                            stroke-width="0.9" opacity="0.55" />
+                        <path class="kbach-leaf" d="M16 16 C28 16 36 22 38 34 C26 32 18 26 16 16 Z" fill="none"
+                            stroke="currentColor" stroke-width="1.2" />
+                        <path class="kbach-leaf" d="M16 16 C22 28 28 36 40 38 C38 26 30 18 16 16 Z" fill="none"
+                            stroke="currentColor" stroke-width="1.2" />
+                        <path class="kbach-tip" d="M40 16 L45 24 L40 32 L35 24 Z" fill="currentColor" opacity="0.85" />
+                        <path class="kbach-tip" d="M16 40 L24 35 L32 40 L24 45 Z" fill="currentColor" opacity="0.85" />
+                        <rect x="15" y="15" width="5" height="5" fill="currentColor" />
+                    </svg>
+                </div>
+            </section>
+
+            <!-- 3. SECTION LỜI NGỎ & CHỮ LỒNG H & T -->
+            <section class="sec-story">
+                <svg class="kbach-divider" viewBox="0 0 160 24" aria-hidden="true">
+                    <path d="M2 12h42c10 0 10-10 18-10s8 20 18 20 8-20 18-20 8 10 18 10h42M72 12l8-8 8 8-8 8z"></path>
+                </svg>
+                <div class="monogram-wreath pnr-reveal"
+                    style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; min-height: 120px; margin: 0 auto; padding: 12px 16px; border: 1.5px solid rgba(121, 6, 6, 0.35); border-radius: 0px; background: rgba(255, 255, 255, 0.55);">
+                    <img src="assets/8.PNG" alt="" aria-hidden="true" class="wreath-bg-img"
+                        onerror="this.style.display='none'"
+                        style="position: relative; width: auto; height: auto; max-width: 260px; max-height: 110px; object-fit: contain; display: block; margin: 0 auto; border-radius: 0px;">
+                </div>
+
+                <p class="story-quote pnr-reveal" data-i18n="story">
+                    Chúng tôi đã cùng nhau viết nên<br>
+                    câu chuyện tình yêu suốt những năm qua...<br>
+                    Và chương tiếp theo sẽ bắt đầu sau
+                </p>
+
+                <span class="vertical-line pnr-reveal"></span>
+
+                <h2 class="title-serif-lg pnr-reveal" data-i18n="wedding_day">Ngày chung đôi</h2>
+                <p class="subtitle-lora pnr-reveal" data-i18n="subtitle_date">17 . 1 . 2027</p>
+
+                <div class="torn-photo-frame pnr-reveal">
+                    <img alt="Khoảnh khắc" src="assets/1.jpg">
+                </div>
+            </section>
+
+            <!-- 4. SECTION THÔNG TIN TIỆC CƯỚI & GOOGLE MAPS -->
+            <section class="sec-invitation">
+                <svg class="kbach-divider" viewBox="0 0 160 24" aria-hidden="true">
+                    <path d="M2 12h42c10 0 10-10 18-10s8 20 18 20 8-20 18-20 8 10 18 10h42M72 12l8-8 8 8-8 8z"></path>
+                </svg>
+                <p class="invite-intro pnr-reveal" data-i18n="invite_intro">
+                    Trân trọng kính mời tham dự buổi tiệc cưới<br>
+                    cùng gia đình chúng tôi
+                </p>
+
+                <div class="couple-watermark-box pnr-reveal">
+                    <span class="bg-amp">&amp;</span>
+                    <p class="couple-full-names">
+                        <span class="language-vi"> Kim Phượng</span>
+                        <span class="language-km khmer-text" lang="km" hidden> គីម ភឿង</span>
+                        <span class="language-vi">Thạch Nguyên</span>
+                        <span class="language-km khmer-text" lang="km" hidden>ថាច់ ង្វៀន</span>
+                    </p>
+                </div>
+
+                <div class="event-details pnr-reveal">
+                    <p class="event-time" data-i18n="event_time"> THỨ TƯ</p>
+                    <div class="date-split-row">
+                        <span class="date-side" data-i18n="month_1">Tháng 1</span>
+                        <span class="date-big">17</span>
+                        <span class="date-side" data-i18n="year_2026">Năm 2027</span>
+                    </div>
+                    <p class="lunar-text" data-i18n="lunar_date">(Tức ngày 10 tháng 12 năm Bính Ngọ)</p>
+
+                    <p class="at-label" data-i18n="at_venue">Tại địa điểm:</p>
+                    <h3 class="venue-title" data-i18n="venue_title">Tư Gia </h3>
+                    <p class="venue-addr" data-i18n="venue_address">Khóm 4, Phường Nguyệt Hóa, Vĩnh Long</p>
+
+                    <div class="map-box">
+                        <iframe
+                            src="https://maps.google.com/maps?q=9.9300594,106.3286578&amp;hl=vi&amp;z=17&amp;output=embed"
+                            loading="lazy" title="Bản đồ"></iframe>
+                    </div>
+
+                    <a href="https://www.google.com/maps/place/9%C2%B055'48.2%22N+106%C2%B019'43.2%22E/@9.9301651,106.3259219,17z/data=!4m4!3m3!8m2!3d9.9300594!4d106.3286578?entry=ttu&g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener noreferrer" class="btn-direction">
+                        <span data-i18n="directions">Bản đồ chỉ đến địa điểm</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 5. SECTION NỀN ĐỎ ĐẬM: CHÚ RỂ - CÔ DÂU & HAI HỌ -->
+            <section class="sec-dark-crimson">
+                <div class="dark-header pnr-reveal">
+                    <p class="small-caps" data-i18n="from_bride_family">Bên em</p>
+                    <h2 class="script-heading" data-i18n="once_again">Một lần nữa</h2>
+                    <p class="small-caps" data-i18n="full_love">Trọn yêu thương</p>
+                </div>
+                <svg class="kbach-divider" viewBox="0 0 160 24" aria-hidden="true">
+                    <path d="M2 12h42c10 0 10-10 18-10s8 20 18 20 8-20 18-20 8 10 18 10h42M72 12l8-8 8 8-8 8z"></path>
+                </svg>
+
+                <div class="polaroid-duo">
+                    <div class="polaroid-card pnr-reveal">
+                        <div class="polaroid-img">
+                            <img alt="Kim Phượng" src="assets/5.jpg">
+                        </div>
+                        <p class="role-script language-vi">Trưởng Nữ<br> Kim Phượng</p>
+                        <p class="role-script khmer-text language-km" lang="km" hidden>កូនក្រមុំ</p>
+                        <p class="person-name khmer-text language-km" lang="km" hidden>គីម ភឿង</p>
+                    </div>
+
+                    <div class="polaroid-card pnr-reveal">
+                        <div class="polaroid-img">
+                            <img alt="Thạch Nguyên" src="assets/7.jpg">
+                        </div>
+                        <p class="role-script language-vi">Trưởng Nam<br>Thạch Nguyên</p>
+                        <p class="role-script khmer-text language-km" lang="km" hidden>កូនកម្លោះ</p>
+                        <p class="person-name khmer-text language-km" lang="km" hidden>ថាច់ ង្វៀន</p>
+                    </div>
+                </div>
+
+                <div class="parents-grid pnr-reveal">
+                    <div class="parent-left">
+                        <p class="p-title language-vi">Nhà Gái</p>
+                        <p class="khmer-text khmer-heading language-km" lang="km" hidden>គ្រួសារខាងស្រី</p>
+                        <p class="language-vi">Ông: SƠN PHƯƠNG</p>
+                        <p class="khmer-text language-km" lang="km" hidden>លោក៖ សឺន ផឿង</p>
+                        <p class="language-vi">Bà: KIM THỊ PHƯỚC</p>
+                        <p class="khmer-text language-km" lang="km" hidden>លោកស្រី៖ គីម ធី ភឿក</p>
+                        <p class="language-vi">Khóm 4, Phường Nguyệt Hóa,<br>Vĩnh Long</p>
+                        <p class="khmer-text language-km" lang="km" hidden>ភូមិ៤ សង្កាត់ង្វៀតហ្វា ខេត្តវិញឡុង</p>
+                    </div>
+                    <div class="parent-right">
+                        <p class="p-title language-vi">Nhà Trai</p>
+                        <p class="khmer-text khmer-heading language-km" lang="km" hidden>គ្រួសារខាងប្រុស</p>
+                        <p class="language-vi">Ông: THẠCH DANE</p>
+                        <p class="khmer-text language-km" lang="km" hidden>លោក៖ ថាច់ ដានេ</p>
+                        <p class="language-vi">Bà: THẠCH THỊ SONE</p>
+                        <p class="khmer-text language-km" lang="km" hidden>លោកស្រី៖ ថាច់ ធី សូន</p>
+                        <p class="language-vi">Thôn K’Nai, Xã Đức Trọng,<br>Lâm Đồng</p>
+                        <p class="khmer-text language-km" lang="km" hidden>ភូមិកឺណៃ ឃុំឌឹកត្រុង ខេត្តឡឹមដុង</p>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!-- 7. SECTION ĐẾM NGƯỢC TRÊN NỀN ẢNH -->
+            <section class="sec-countdown">
+                <div class="cd-photo-box pnr-reveal">
+                    <img alt="Đếm ngược" src="assets/3.jpg">
+                    <div class="cd-overlay"></div>
+                    <div class="cd-content">
+                        <p class="cd-title" data-i18n="countdown">Đếm ngược</p>
+                        <div class="cd-grid">
+                            <div class="cd-unit"><span id="cd-days">00</span><small data-i18n="days">Ngày</small></div>
+                            <span class="cd-colon">:</span>
+                            <div class="cd-unit"><span id="cd-hours">00</span><small data-i18n="hours">Giờ</small></div>
+                            <span class="cd-colon">:</span>
+                            <div class="cd-unit"><span id="cd-mins">00</span><small data-i18n="minutes">Phút</small>
+                            </div>
+                            <span class="cd-colon">:</span>
+                            <div class="cd-unit"><span id="cd-secs">00</span><small data-i18n="seconds">Giây</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. SECTION ALBUM ẢNH & CAROUSEL 3D -->
+            <section class="sec-album">
+                <div class="sec-title-group pnr-reveal">
+                    <h2 class="heading-crimson" data-i18n="moments">Những khoảnh khắc</h2>
+                    <p class="sub-gray" data-i18n="moments_sub">Đong đầy yêu dấu</p>
+                </div>
+                <svg class="kbach-divider" viewBox="0 0 160 24" aria-hidden="true">
+                    <path d="M2 12h42c10 0 10-10 18-10s8 20 18 20 8-20 18-20 8 10 18 10h42M72 12l8-8 8 8-8 8z"></path>
+                </svg>
+
+                <!-- <div class="featured-photo pnr-reveal" onclick="openLightbox('https://cdn.thieponline.app/images/themes/longphung-v3-red/gallery_3.jpg')">
+                    <img alt="Khoảnh khắc nổi bật" src="assets/">
+                </div> -->
+
+                <div class="carousel-3d-wrapper">
+                    <div class="carousel-3d-stage" id="carousel-stage">
+                        <button type="button" class="c3d-nav prev" id="c3d-prev" aria-label="Ảnh trước"
+                            data-i18n="previous" data-i18n-aria="previous">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <polygon points="16,4 7,12 16,20 13.5,12"></polygon>
+                            </svg>
+                        </button>
+
+                        <button type="button" class="c3d-nav next" id="c3d-next" aria-label="Ảnh sau" data-i18n="next"
+                            data-i18n-aria="next">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <polygon points="8,4 17,12 8,20 10.5,12"></polygon>
+                            </svg>
+                        </button>
+                        <div class="carousel-3d-track" id="carousel-track">
+                            <div class="carousel-3d-track" id="carousel-track">
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/8.PNG"
+                                        alt="Ảnh cưới 01"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/9.jpg"
+                                        alt="Ảnh cưới 02"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/10.jpg"
+                                        alt="Ảnh cưới 03"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/11.jpg"
+                                        alt="Ảnh cưới 04"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/12.jpg"
+                                        alt="Ảnh cưới 05"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/13.jpg"
+                                        alt="Ảnh cưới 06"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/14.jpg"
+                                        alt="Ảnh cưới 07"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/5.jpg"
+                                        alt="Ảnh cưới 08"></div>
+                                <div class="c3d-slide" style="border-radius: 0;"><img src="assets/7.jpg"
+                                        alt="Ảnh cưới 09"></div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <p class="c3d-counter" id="c3d-counter">1 / 9</p>
+                </div>
+            </section>
+
+            <!-- 9. SECTION SỔ LƯU BÚT -->
+            <section class="sec-guestbook">
+                <div class="sec-title-group pnr-reveal">
+                    <h2 class="heading-crimson" data-i18n="guestbook">Sổ lưu bút</h2>
+                </div>
+                <svg class="kbach-divider" viewBox="0 0 160 24" aria-hidden="true">
+                    <path d="M2 12h42c10 0 10-10 18-10s8 20 18 20 8-20 18-20 8 10 18 10h42M72 12l8-8 8 8-8 8z"></path>
+                </svg>
+
+                <form id="wish-form" class="gb-form pnr-reveal">
+                    <input type="text" id="gb-name" class="pnr-input" placeholder="Nhập tên*"
+                        data-i18n-placeholder="name_placeholder" required>
+                    <textarea id="gb-msg" class="pnr-input pnr-textarea" placeholder="Nhập lời chúc*"
+                        data-i18n-placeholder="wish_placeholder" rows="3" required></textarea>
+                    <div class="gb-actions">
+                        <button type="button" id="wish-suggest-btn" class="btn-suggest" data-i18n="suggest_wish">Gợi ý
+                            lời chúc</button>
+                        <button type="submit" class="pnr-btn" data-i18n="send_wish">GỬI LỜI CHÚC</button>
+                    </div>
+                </form>
+
+                <div class="gb-list" id="gb-list">
+                    <div class="gb-card">
+                        <div class="gb-card-top">
+                            <strong>Ngọc Hân</strong>
+                            <span>20/11/2026</span>
+                        </div>
+                        <p data-i18n="wish_1">Chúc hai bạn trăm năm hạnh phúc, mãi yêu thương nhau như ngày đầu nhé!</p>
+                    </div>
+                    <div class="gb-card">
+                        <div class="gb-card-top">
+                            <strong>Gia đình cô Ba</strong>
+                            <span>21/11/2026</span>
+                        </div>
+                        <p data-i18n="wish_2">Chúc hai cháu xây dựng một mái ấm thật đầm ấm, sớm có tin vui.</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <footer class="sec-footer">
+                <section class="thankyou-card pnr-reveal">
+                    <img class="thankyou-bg" src="assets/5.jpg" alt="Khoảnh khắc của cô dâu và chú rể">
+                    <div class="thankyou-overlay"></div>
+                    <div class="thankyou-content">
+                        <p class="thankyou-script" data-i18n="thankyou_script">Thank you</p>
+                        <h2 class="thankyou-title" data-i18n="thankyou_title">Xin chân thành cảm ơn</h2>
+                        <p class="thankyou-text" data-i18n="thankyou_text">
+                            Hẹn gặp bạn trong ngày đặc biệt nhất của chúng mình.
+                            Sẽ thật hạnh phúc khi có bạn ở đó, cùng chia niềm vui
+                            và chứng kiến khoảnh khắc ý nghĩa của chúng mình.
+                        </p>
+                    </div>
+                </section>
+            </footer>
+
+        </main>
+    </div>
+
+
+    <!-- LIGHTBOX XEM ẢNH PHÓNG TO -->
+    <div id="lightbox" class="lightbox" onclick="this.style.display='none'">
+        <span class="lb-close" data-i18n="close">ĐÓNG</span>
+        <img id="lightbox-img" src="" alt="Phóng to">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
