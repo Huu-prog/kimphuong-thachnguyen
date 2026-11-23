@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             wedding_day: "Ngày chung đôi",
             invite_intro: "Trân trọng kính mời tham dự buổi tiệc cưới<br>cùng gia đình chúng tôi",
             at_venue: "Tại địa điểm:",
-            venue_title: "Tại Tư Gia",
+            venue_title: " Tư Gia",
             venue_address: "Khóm 4, Phường Nguyệt Hóa, Vĩnh Long",
             countdown: "Đếm ngược",
             days: "Ngày", hours: "Giờ", minutes: "Phút", seconds: "Giây",
