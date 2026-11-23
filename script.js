@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
         vi: {
             language_switch: "Chuyển đổi ngôn ngữ",
             music_toggle: "Phát/Tạm dừng nhạc",
-            cover_date: "17 tháng 1, 2027",
-            hero_date: "17 . 1 . 2027",
-            subtitle_date: "17 . 1 . 2027",
+            cover_date: "25 tháng 11, 2026",
+            hero_date: "25 . 11 . 2026",
+            subtitle_date: "25 . 11 . 2026",
             guest: "Quý Khách",
             earth_brown: "Nâu đất",
             wine_red: "Đỏ rượu vang",
@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
             thankyou_script: "Thank you",
             thankyou_title: "Xin chân thành cảm ơn",
             thankyou_text: "Hẹn gặp bạn trong ngày đặc biệt nhất của chúng mình. Sẽ thật hạnh phúc khi có bạn ở đó, cùng chia niềm vui và chứng kiến khoảnh khắc ý nghĩa của chúng mình.",
-            calendar_month: "Tháng 1 / 2027",
+            calendar_month: "Tháng 11 / 2026",
             mon: "T2", tue: "T3", wed: "T4", thu: "T5", fri: "T6", sat: "T7", sun: "CN",
-            event_time: "CHỦ NHẬT",
-            month_1: "Tháng 1",
-            year_2026: "Năm 2027",
-            lunar_date: "(Tức ngày 10 tháng 12 năm Bính Ngọ)",
+            event_time: "11:00, THỨ TƯ",
+            month_11: "Tháng 11",
+            year_2026: "Năm 2026",
+            lunar_date: "(Tức ngày 17 tháng 10 năm Bính Ngọ)",
             directions: "Chỉ đường",
             from_bride_family: "Bên em",
             once_again: "Một lần nữa",
@@ -52,9 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
         km: {
             language_switch: "ប្តូរភាសា",
             music_toggle: "ចាក់/ផ្អាកតន្ត្រី",
-            cover_date: "17 ខែ 1, 2027",
-            hero_date: "17 . 1 . 2027",
-            subtitle_date: "17 . 1 . 2027",
+            cover_date: "25 ខែ 11, 2026",
+            hero_date: "25 . 11 . 2026",
+            subtitle_date: "25 . 11 . 2026",
             guest: "ភ្ញៀវរួម",
             earth_brown: "ពណ៌តែន",
             wine_red: "ពណ៌ស្រាក្រហម",
@@ -64,12 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
             thankyou_script: "អរគុណ",
             thankyou_title: "សូមថ្លែងអំណរគុណ",
             thankyou_text: "យើងខ្ញុំសង្ឃឹមថានឹងបានជួបភ្ញៀវក្នុងថ្ងៃពិសេសបំផុត។ វាជាកិត្តិយសយ៉ាងសំខាន់ ដែលមានភ្ញៀវចូលរួមចែករំលែកសុភមង្គល និងសాక్షីពេលវេលាដ៏មានន័យរបស់យើងខ្ញុំ។",
-            calendar_month: "ខែ 1 / 2027",
+            calendar_month: "ខែ 11 / 2026",
             mon: "ច័ន", tue: "អង្គារ", wed: "ពុធ", thu: "ព្រហស្បត៌", fri: "សុក្រ", sat: "សៅវ៍", sun: "អាទិត្យ",
-            event_time: "ថ្ងៃអាទិត្យ",
-            month_1: "ខែ 1",
-            year_2026: "ឆ្នាំ 2027",
-            lunar_date: "(ថ្ងៃទី 10 ខែ 12 ឆ្នាំBính Ngọ)",
+            event_time: "11:00, ថ្ងៃពុធ",
+            month_11: "ខែ 11",
+            year_2026: "ឆ្នាំ 2026",
+            lunar_date: "(ថ្ងៃទី 17 ខែ 10 ឆ្នាំBính Ngọ)",
             directions: "មើលផ្លូវ",
             from_bride_family: "ភាគខាងកូនស្រី",
             once_again: "មួយដងទៀត",
@@ -179,50 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
         convertDigits(document.querySelector(".pnr-cover") || document.body, isKhmer);
     }
 
-    function renderCalendar() {
-        const calendarGrid = document.querySelector(".cal-grid");
-        if (!calendarGrid) return;
-
-        const lunarDays = [
-            "24/11", "25", "26", "27", "28", "29", "30",
-            "1/12", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11", "12", "13", "14", "15", "16", "17",
-            "18", "19", "20", "21", "22", "23", "24"
-        ];
-        const headers = Array.from(calendarGrid.querySelectorAll(".cal-head"));
-        calendarGrid.replaceChildren(...headers);
-
-        const firstWeekday = (new Date(2027, 0, 1).getDay() + 6) % 7;
-        for (let i = 0; i < firstWeekday; i++) {
-            calendarGrid.appendChild(document.createElement("span"));
-        }
-
-        lunarDays.forEach((lunarDate, index) => {
-            const solarDate = index + 1;
-            const dayCell = document.createElement("span");
-            const lunarMonth = solarDate < 8 ? 11 : 12;
-            const accessibleLunarDate = lunarDate.includes("/")
-                ? lunarDate.replace("/", " tháng ")
-                : `${lunarDate} tháng ${lunarMonth}`;
-            dayCell.setAttribute("aria-label", `Ngày dương ${solarDate}, ngày âm ${accessibleLunarDate}`);
-
-            if (solarDate === 17) {
-                dayCell.classList.add("cal-wedding-day");
-                const solarLabel = document.createElement("span");
-                solarLabel.className = "cal-day-num";
-                solarLabel.textContent = String(solarDate);
-                dayCell.appendChild(solarLabel);
-            } else {
-                dayCell.textContent = String(solarDate);
-            }
-
-            calendarGrid.appendChild(dayCell);
-        });
-    }
-
-    renderCalendar();
-    setLanguage("vi");
-
     document.querySelectorAll(".language-option").forEach((button) => {
         button.addEventListener("click", () => setLanguage(button.dataset.language));
     });
@@ -285,8 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     revealEls.forEach((el) => observer.observe(el));
 
-    // 3. Đồng hồ đếm ngược đến ngày 17/01/2027
-    const targetTime = new Date(2027, 0, 17).getTime();
+    // 3. Đồng hồ đếm ngược đến 25/11/2026 11:00
+    const targetTime = new Date("2026-11-25T11:00:00").getTime();
 
     function updateCountdown() {
         const diff = targetTime - Date.now();
@@ -403,46 +359,129 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 5. Sổ lưu bút & Nút gợi ý lời chúc nhanh
-    const sampleWishes = {
-        vi: [
-            "Chúc hai bạn trăm năm hạnh phúc, bạc đầu nghĩa phu thê!",
-            "Chúc mừng hạnh phúc tân lang tân nương, sớm sinh quý tử nhé!",
-            "Chúc hai bạn mãi nắm tay nhau đi qua mọi chặng đường bình an và viên mãn!"
-        ],
-        km: [
-            "សូមជូនពរឲ្យទាំងពីរសប្បាយចិត្ត និងស្នេហាអស់កល្បជានិច្ច!",
-            "សូមមង្គលការមានសុភមង្គល និងបានសំណាងល្អ!",
-            "សូមជូនពរឲ្យទាំងពីរដើរជាមួយគ្នាតลอดទីលានជីវិត!"
-        ]
-    };
+const GUESTBOOK_API_URL = "https://script.google.com/macros/s/AKfycbxZnQTOfIyOvS4sAp3ZEOHVKwkVWGPlHECjiunPqDTZTPeERIPXLuMgyJpgDN3h1wJhFA/exec";
 
-    document.getElementById("wish-suggest-btn").addEventListener("click", () => {
-        const wishes = sampleWishes[currentLanguage];
-        const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
-        document.getElementById("gb-msg").value = randomWish;
-    });
+const sampleWishes = {
+    vi: [
+        "Chúc hai bạn trăm năm hạnh phúc, bạc đầu nghĩa phu thê!",
+        "Chúc mừng hạnh phúc tân lang tân nương, sớm sinh quý tử nhé!",
+        "Chúc hai bạn mãi nắm tay nhau đi qua mọi chặng đường bình an và viên mãn!"
+    ],
+    km: [
+        "សូមជូនពរឲ្យទាំងពីរសប្បាយចិត្ត និងស្នេហាអស់កល្បជានិច្ច!",
+        "សូមមង្គលការមានសុភមង្គល និងបានសំណាងល្អ!",
+        "សូមជូនពរឲ្យទាំងពីរដើរជាមួយគ្នាតลอดទីលានជីវិត!"
+    ]
+};
 
-    document.getElementById("wish-form").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const nameInput = document.getElementById("gb-name");
-        const msgInput = document.getElementById("gb-msg");
-        const list = document.getElementById("gb-list");
+function escapeHTML(str) {
+    return String(str ?? "").replace(/[&<>'"]/g, t => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;"
+    }[t]));
+}
 
-        if (nameInput.value.trim() && msgInput.value.trim()) {
-            const card = document.createElement("div");
-            card.className = "gb-card";
-            card.innerHTML = `
-                <div class="gb-card-top">
-                    <strong>${escapeHTML(nameInput.value.trim())}</strong>
-                    <span>${translations[currentLanguage].today}</span>
-                </div>
-                <p>${escapeHTML(msgInput.value.trim())}</p>
-            `;
-            list.prepend(card);
+function createWishCardElement(name, message) {
+    const card = document.createElement("div");
+    card.className = "gb-card";
+    card.style.borderRadius = "0";
+    card.innerHTML = `
+        <div class="gb-card-top">
+            <strong>${escapeHTML(name)}</strong>
+        </div>
+        <p>${escapeHTML(message)}</p>
+    `;
+    return card;
+}
+
+function isGuestbookConfigured() {
+    return Boolean(GUESTBOOK_API_URL) && !GUESTBOOK_API_URL.includes("DAN_LINK_WEB_APP");
+}
+
+async function loadSavedWishes() {
+    const list = document.getElementById("gb-list");
+    if (!list || !isGuestbookConfigured()) return;
+
+    try {
+        const res = await fetch(GUESTBOOK_API_URL, { method: "GET" });
+        const data = await res.json();
+        if (data && data.ok && Array.isArray(data.items) && data.items.length > 0) {
+            list.innerHTML = "";
+            data.items.forEach((item) => {
+                if (!item || !item.name || !item.message) return;
+                list.appendChild(createWishCardElement(item.name, item.message));
+            });
+        }
+    } catch (err) {
+        // Giữ nguyên danh sách đang hiển thị nếu gặp sự cố mạng
+    }
+}
+
+document.getElementById("wish-suggest-btn")?.addEventListener("click", () => {
+    const lang = typeof currentLanguage !== "undefined" ? currentLanguage : "vi";
+    const wishes = sampleWishes[lang] || sampleWishes.vi;
+    const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+    const msgEl = document.getElementById("gb-msg");
+    if (msgEl) msgEl.value = randomWish;
+});
+
+document.getElementById("wish-form")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const nameInput = document.getElementById("gb-name");
+    const msgInput = document.getElementById("gb-msg");
+    const list = document.getElementById("gb-list");
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    const cleanName = nameInput ? nameInput.value.trim() : "";
+    const cleanMsg = msgInput ? msgInput.value.trim() : "";
+    if (!cleanName || !cleanMsg || !list) return;
+
+    if (!isGuestbookConfigured()) {
+        list.prepend(createWishCardElement(cleanName, cleanMsg));
+        nameInput.value = "";
+        msgInput.value = "";
+        return;
+    }
+
+    const oldBtnText = submitBtn ? submitBtn.textContent : "";
+    const lang = typeof currentLanguage !== "undefined" ? currentLanguage : "vi";
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = lang === "km" ? "កំពុងផ្ញើ..." : "ĐANG GỬI...";
+    }
+
+    try {
+        const res = await fetch(GUESTBOOK_API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify({
+                name: cleanName,
+                message: cleanMsg
+            })
+        });
+        const data = await res.json();
+
+        if (data && data.ok) {
+            list.prepend(createWishCardElement(cleanName, cleanMsg));
             nameInput.value = "";
             msgInput.value = "";
         }
-    });
+    } catch (err) {
+        // Có thể hiển thị thông báo lỗi riêng nếu bạn có thẻ báo trạng thái
+    } finally {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = oldBtnText;
+        }
+    }
+});
+
+// Tự động tải lời chúc đã lưu khi mở trang
+loadSavedWishes();
 
     function escapeHTML(str) {
         return str.replace(/[&<>'"]/g, t => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[t]));
