@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
             thankyou_script: "Thank you",
             thankyou_title: "Xin chân thành cảm ơn",
             thankyou_text: "Hẹn gặp bạn trong ngày đặc biệt nhất của chúng mình. Sẽ thật hạnh phúc khi có bạn ở đó, cùng chia niềm vui và chứng kiến khoảnh khắc ý nghĩa của chúng mình.",
-            calendar_month: "Tháng 11 / 2026",
+            calendar_month: "Tháng 1 / 2027",
             mon: "T2", tue: "T3", wed: "T4", thu: "T5", fri: "T6", sat: "T7", sun: "CN",
             event_time: "11:00, THỨ TƯ",
             month_11: "Tháng 11",
@@ -241,26 +241,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     revealEls.forEach((el) => observer.observe(el));
 
-    // 3. Đồng hồ đếm ngược đến 25/11/2026 11:00
-    const targetTime = new Date("2026-11-25T11:00:00").getTime();
+ // 3. Đồng hồ đếm ngược đến 17/01/2027 07:00 (GMT+7)
+const targetTime = new Date("2027-01-17T07:00:00+07:00").getTime();
 
-    function updateCountdown() {
-        const diff = targetTime - Date.now();
-        if (diff <= 0) return;
+function updateCountdown() {
+    const daysEl = document.getElementById("cd-days");
+    const hoursEl = document.getElementById("cd-hours");
+    const minsEl = document.getElementById("cd-mins");
+    const secsEl = document.getElementById("cd-secs");
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / 1000 / 60) % 60);
-        const s = Math.floor((diff / 1000) % 60);
+    const diff = Math.max(0, targetTime - Date.now());
 
-        document.getElementById("cd-days").textContent = String(d).padStart(2, "0");
-        document.getElementById("cd-hours").textContent = String(h).padStart(2, "0");
-        document.getElementById("cd-mins").textContent = String(m).padStart(2, "0");
-        document.getElementById("cd-secs").textContent = String(s).padStart(2, "0");
-        if (currentLanguage === "km") convertDigits(document.getElementById("cd-secs").parentElement.parentElement, true);
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = String(d).padStart(2, "0");
+    hoursEl.textContent = String(h).padStart(2, "0");
+    minsEl.textContent = String(m).padStart(2, "0");
+    secsEl.textContent = String(s).padStart(2, "0");
+
+    const lang = typeof currentLanguage !== "undefined" ? currentLanguage : "vi";
+    const container = secsEl.parentElement?.parentElement;
+    if (lang === "km" && container && typeof convertDigits === "function") {
+        convertDigits(container, true);
     }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+
+    if (diff === 0 && typeof countdownTimer !== "undefined") {
+        clearInterval(countdownTimer);
+    }
+}
+
+updateCountdown();
+const countdownTimer = setInterval(updateCountdown, 1000);
 
     // 4. 3D Perspective Carousel (Xoay 3D 9 ảnh mượt mà, không giật scroll trang)
     const stage = document.getElementById("carousel-stage");
