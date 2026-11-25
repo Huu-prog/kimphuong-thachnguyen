@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             footer_thanks: "Xin chân thành cảm ơn sự hiện diện và những lời chúc phúc của quý khách.",
             thankyou_script: "Thank you",
             thankyou_title: "Xin chân thành cảm ơn",
-            thankyou_text: "Hẹn gặp bạn trong ngày đặc biệt nhất của chúng mình. Sẽ thật hạnh phúc khi có bạn ở đó, cùng chia niềm vui và chứng kiến khoảnh khắc ý nghĩa của chúng mình.",
+            thankyou_text: "Chúng tôi rất mong được đón tiếp sự hiện diện quý báu của toàn thể quý vị khách quý trong ngày trọng đại và đặc biệt nhất này. Sự có mặt của quý vị là niềm vinh dự lớn lao, là minh chứng cho tình yêu thương cũng như sự chung vui, chia sẻ niềm hạnh phúc trong khoảnh khắc ý nghĩa nhất của cuộc đời chúng tôi.",
             calendar_month: "Tháng 1 / 2027",
             mon: "T2", tue: "T3", wed: "T4", thu: "T5", fri: "T6", sat: "T7", sun: "CN",
             event_time: " THỨ TƯ",
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
             footer_thanks: "សូមអរគុណសម្រាប់វត្តមាន និងពាក្យសិរីសួស្តី!",
             thankyou_script: "អរគុណ",
             thankyou_title: "សូមថ្លែងអំណរគុណ",
-            thankyou_text: "យើងខ្ញុំសង្ឃឹមថានឹងបានជួបភ្ញៀវក្នុងថ្ងៃពិសេសបំផុត។ វាជាកិត្តិយសយ៉ាងសំខាន់ ដែលមានភ្ញៀវចូលរួមចែករំលែកសុភមង្គល និងសాక్షីពេលវេលាដ៏មានន័យរបស់យើងខ្ញុំ។",
+            thankyou_text: "យើងខ្ញុំសង្ឃឹមយ៉ាងមុតមាំថានឹងបានទទួលស្វាគមន៍វត្តមានដ៏ឧត្តុង្គឧត្តមរបស់ភ្ញៀវកិត្តិយសទាំងអស់ក្នុងថ្ងៃដ៏ពិសេសបំផុតនេះ។ វត្តមានរបស់លោក លោកស្រី អ្នកនាង កញ្ញា គឺជាកិត្តិយសដ៏ធំធេង និងជាសក្ខីភាពនៃសេចក្តីស្រឡាញ់ ព្រមទាំងការចូលរួមចែករំលែកនូវសុភមង្គលក្នុងពេលវេលាដ៏មានអត្ថន័យបំផុតរបស់យើងខ្ញុំ។",
             calendar_month: "ខែ 1 / 2027",
             mon: "ច័ន", tue: "អង្គារ", wed: "ពុធ", thu: "ព្រហស្បត៌", fri: "សុក្រ", sat: "សៅវ៍", sun: "អាទិត្យ",
             event_time: " ថ្ងៃអាទិត្យ",
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
             year_2027: "ឆ្នាំ 2027",
             lunar_date: "(ថ្ងៃអាទិត្យ ១០កើត ខែបុស្ស ឆ្នាំ មមី អដ្ឋស័ក ព.ស ២០៧០)",
             directions: "មើលផ្លូវ",
-            from_bride_family: "ភាគខាងកូនស្រី",
+            from_bride_family: "ក្បែរអូន",
             once_again: "ស្នេហាដ៏ពេញលេញ",
             // full_love: "",
             cover_invite: "សូមអញ្ជើញ",
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             suggest_wish: "យោបល់ពិធី",
             send_wish: "ផ្ញើពាក្យសម្ដី",
             name_placeholder: "បញ្ចូលឈ្មោះ*",
-            wish_placeholder: "បញ្ចូលពាក្យអធិស្ឋាន*",
+            wish_placeholder: "បញ្ចូលពាក្យជូនពរ*",
             previous: "មុន",
             next: "បន្ទាប់",
             today: "ថ្ងៃនេះ",
@@ -211,6 +211,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
             coverOverlay.style.display = "none";
+            const root = document.documentElement;
+            const page = document.scrollingElement || document.documentElement;
+            const startPosition = page.scrollTop;
+            const endPosition = Math.max(0, page.scrollHeight - window.innerHeight);
+            const distance = endPosition - startPosition;
+            const duration = Math.abs(distance) / (window.innerHeight * 0.2) * 1000;
+
+            if (distance > 0) {
+                const originalScrollBehavior = root.style.scrollBehavior;
+                root.style.scrollBehavior = "auto";
+                const startTime = performance.now();
+                let frameId;
+                const stopAutoScroll = () => {
+                    cancelAnimationFrame(frameId);
+                    root.style.scrollBehavior = originalScrollBehavior;
+                    window.removeEventListener("touchstart", stopAutoScroll);
+                    window.removeEventListener("wheel", stopAutoScroll);
+                    window.removeEventListener("pointerdown", stopAutoScroll);
+                    window.removeEventListener("keydown", stopAutoScroll);
+                };
+                const scrollDown = (currentTime) => {
+                    const progress = Math.min((currentTime - startTime) / duration, 1);
+                    page.scrollTop = startPosition + distance * progress;
+                    if (progress < 1) {
+                        frameId = requestAnimationFrame(scrollDown);
+                    } else {
+                        stopAutoScroll();
+                    }
+                };
+                window.addEventListener("touchstart", stopAutoScroll, { passive: true });
+                window.addEventListener("wheel", stopAutoScroll, { passive: true });
+                window.addEventListener("pointerdown", stopAutoScroll, { passive: true });
+                window.addEventListener("keydown", stopAutoScroll);
+                frameId = requestAnimationFrame(scrollDown);
+            }
         }, 760);
     });
 
