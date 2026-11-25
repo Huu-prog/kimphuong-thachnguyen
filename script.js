@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const startPosition = page.scrollTop;
             const endPosition = Math.max(0, page.scrollHeight - window.innerHeight);
             const distance = endPosition - startPosition;
-            const duration = Math.abs(distance) / (window.innerHeight * 0.2) * 1000;
+            const duration = Math.abs(distance) / (window.innerHeight * 0.1) * 1000;
 
             if (distance > 0) {
                 const originalScrollBehavior = root.style.scrollBehavior;
