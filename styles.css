@@ -103,7 +103,12 @@ body.locked {
     font-family: var(--font-display-vi);
     line-height: 1.9;
 }
-
+/* Áp dụng cho chữ Khmer */
+.cover-couple-names .language-km,
+.cover-couple-names .khmer-text {
+  font-family: var(--font-khmer-heading);
+  line-height: 1.45; /* Font Moul hơi cao nét nên tăng line-height để không bị chạm dòng */
+}
 /* =========================================================
    MÀN HÌNH BÌA PHỦ (PEONY RED ENVELOPE COVER)
 ========================================================= */
